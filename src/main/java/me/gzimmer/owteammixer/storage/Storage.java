@@ -6,15 +6,16 @@ import me.gzimmer.owteammixer.util.UtilCommon;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Storage implements IStorage, Serializable {
 
-    private final String apiPath = "https://overfast-api.tekrop.fr/players/{player_id}/stats/summary";
+    private final String apiPath = "https://overfast-api.tekrop.fr/players/{player_id}/summary";
 
     private final HashSet<Player> players = new HashSet<>();
 
     @Override
-    public HashSet<Player> getPlayers() {
+    public Set<Player> getPlayers() {
         return new HashSet<>(players);
     }
 
@@ -27,7 +28,7 @@ public class Storage implements IStorage, Serializable {
     public void addPlayers(String bnets) {
         String[] bnetArray = bnets.trim().split(",");
         for (String bnet : bnetArray) {
-            Player player = UtilCommon.getOnlinePlayer(bnet, getPlayerSummaryPath(bnet));
+            Player player = UtilCommon.getOnlinePlayer(getPlayerSummaryPath(bnet), bnet);
             addPlayer(player);
         }
     }

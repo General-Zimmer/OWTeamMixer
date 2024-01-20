@@ -21,12 +21,13 @@ public class MainWindowGController implements IStorageObserver {
 
     @Override
     public void update() {
-
+        lwPlayers.getItems().clear();
+        lwPlayers.getItems().addAll(Controller.getPlayers());
     }
 
     @FXML
     public void onQuickBnet() {
-        String bnets = quickBnet.getText();
+        String bnets = quickBnet.getText().replace("#", "-");
         Controller.addPlayers(bnets);
     }
 }

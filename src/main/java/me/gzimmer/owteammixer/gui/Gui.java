@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Getter;
+import me.gzimmer.owteammixer.controller.Controller;
 import me.gzimmer.owteammixer.observers.IStorageObserver;
 import me.gzimmer.owteammixer.thread.AutoSave;
 
@@ -36,9 +37,10 @@ public class Gui extends Application {
         final int STAGE = 0;
         final int CONTROLLER = 1;
 
-        Object[] stageHovedMenu = createStage("mainWindow.fxml", stage);
+        Object[] stageHovedMenu = createStage("mainWindow.fxml", "MainWindow", stage);
         this.stageHovedMenu = (Stage) stageHovedMenu[STAGE];
         this.stageHovedMenu.show();
+        registerObserver((IStorageObserver) stageHovedMenu[CONTROLLER]);
 
         autoSave = new AutoSave(10);
         autoSave.start();
@@ -50,22 +52,23 @@ public class Gui extends Application {
         }
     }
 
-    private Object[] createStage(String resource) throws Exception {
+    private Object[] createStage(String resource, String title) throws Exception {
         Stage stage = new Stage();
-        return createStage(resource, stage);
+        return createStage(resource, title, stage);
     }
 
-    private <T extends IStorageObserver> Object[] createStage(String resource, Stage stage) throws Exception {
+    private <T extends IStorageObserver> Object[] createStage(String resource, String title, Stage stage) throws Exception {
         Object[] returnArray = new Object[2];
 
         returnArray[0] = stage;
-        URL fxmlFileNameVisFadIndhold = this.getClass().getResource(resource);
+        URL fxmlFileNameVisFadIndhold = this.getClass().getClassLoader().getResource(resource);
         if (fxmlFileNameVisFadIndhold == null) throw new NoSuchElementException("FXML file not found");
         FXMLLoader sceneLoader = new FXMLLoader(fxmlFileNameVisFadIndhold);
         Parent parent = sceneLoader.load();
         T controller = sceneLoader.getController();
         returnArray[1] = controller;
         registerObserver(controller);
+        stage.setTitle(title);
         Scene sceneFadIndhold = new Scene(parent);
         stage.setScene(sceneFadIndhold);
         return returnArray;

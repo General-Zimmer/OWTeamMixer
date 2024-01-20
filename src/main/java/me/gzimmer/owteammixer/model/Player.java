@@ -22,11 +22,16 @@ public class Player implements Serializable {
         this.bnet = bnet;
     }
 
-    public void setRank(String role, String rank, int div) {
+    public void setRank(String role, String div, int tier) {
         switch (role) {
-            case "tank" -> this.tankRank = rank + "_" + div;
-            case "damage"-> this.dpsRank = rank + "_" + div;
-            case "support"-> this.supportRank = rank + "_" + div;
+            case "tank" -> this.tankRank = div + "_" + tier;
+            case "damage"-> this.dpsRank = div + "_" + tier;
+            case "support"-> this.supportRank = div + "_" + tier;
         }
+    }
+
+    @Override
+    public String toString() {
+        return bnet.split("-")[0];
     }
 }

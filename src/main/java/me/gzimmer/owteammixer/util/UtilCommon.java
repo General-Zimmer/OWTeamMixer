@@ -22,24 +22,30 @@ public class UtilCommon {
             conn.connect();
             JSONObject data_obj = getJsonObject(conn, url);
 
-            if (!data_obj.getString("privacy").equalsIgnoreCase("private")) {
+            if (!data_obj.getString("privacy").equalsIgnoreCase("public")) {
                 return player;
             }
 
             JSONObject comp = data_obj.getJSONObject("competitive");
+            JSONObject pc = comp.getJSONObject("pc");
 
-            setPlayerRank(comp, "tank", player);
-            setPlayerRank(comp, "damage", player);
-            setPlayerRank(comp, "support", player);
+            setPlayerRank(pc, "tank", player);
+            setPlayerRank(pc, "damage", player);
+            setPlayerRank(pc, "support", player);
         } catch (IOException e) {
             System.out.println("Error: \n" + Arrays.toString(e.getStackTrace()));
         }
         return player;
     }
 
-    private static void setPlayerRank(JSONObject rank, String role, Player player) {
-        String rankName = rank.getString(role);
-        player.setRank(role, rankName, rank.getInt("tier"));
+    private static void setPlayerRank(JSONObject platform, String role, Player player) {
+        JSONObject rank;
+        try {
+            rank = platform.getJSONObject(role);
+        } catch (Exception e) {
+            return;
+        }
+        player.setRank(role, rank.getString("division"), rank.getInt("tier"));
     }
 
     @NotNull
