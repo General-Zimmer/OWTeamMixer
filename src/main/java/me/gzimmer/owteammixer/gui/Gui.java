@@ -82,26 +82,16 @@ public class Gui extends Application {
         returnArray[0] = scene;
         return returnArray;
     }
-    /**
-     * Tilføjer en observer
-     * @param observer observer
-     */
+
     public void registerObserver(IStorageObserver observer) {
         observers.add(observer);
     }
 
-    /**
-     * Fjerner en observer fra listen med observers.
-     * @param observer observer
-     */
+
     public void unregisterObserver(IStorageObserver observer) {
         observers.remove(observer);
     }
 
-    /**
-     * Sørger for at stoppe vores Auto Save funktion når gui'en bliver lukket.
-     * @throws Exception Exception
-     */
     @Override
     public void stop() throws Exception {
         super.stop();

@@ -14,7 +14,6 @@ public class Storage implements IStorage, Serializable {
 
     @Getter
     private final String apiPath = "https://overfast-api.tekrop.fr/players/{player_id}/summary";
-
     private final HashSet<Player> players = new HashSet<>();
     private final HashSet<Match> matches = new HashSet<>();
 

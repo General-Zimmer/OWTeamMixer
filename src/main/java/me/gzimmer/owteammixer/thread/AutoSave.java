@@ -8,10 +8,10 @@ public class AutoSave extends Thread {
     /**
      * Constructor for AutoSave
      * <p>
-     *     Kaster en IllegalArgumentException hvis sleepTime er mindre end 0
+     *     Throws a IllegalArgumentException if sleepTime is less than 0
      *     <p>
-     *         For at stoppe dette skal man kalde Interrupt()
-     * @param sleepTime Tiden mellem hver autosave i minutter
+     *         To shut down this thread, call Interrupt()
+     * @param sleepTime The time between each autosave in minutes
      */
     public AutoSave(int sleepTime) {
         this.sleepTime = sleepTime*1000*60;

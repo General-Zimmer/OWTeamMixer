@@ -3,7 +3,6 @@ package me.gzimmer.owteammixer.gui.gcontroller;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import me.gzimmer.owteammixer.controller.Controller;
 import me.gzimmer.owteammixer.gui.Gui;
