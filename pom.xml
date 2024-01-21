@@ -33,7 +33,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>me/zimmer/owteammixer/ZimApp.java</mainClass>
+              <mainClass>me/gzimmer/owteammixer/ZimApp</mainClass>
             </manifest>
           </archive>
         </configuration>
