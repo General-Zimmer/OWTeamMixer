@@ -11,14 +11,11 @@ import java.util.*;
 public abstract class Controller {
     private static IStorage storage;
 
-
-
     public static void init() {
         String path = System.getProperty("user.home") + "\\AppData\\Local";
         storage = new Storage();
 
     }
-
 
     public static Match createMatch() {
         Match match = new Match();
@@ -51,7 +48,6 @@ public abstract class Controller {
         Gui.getInstance().notifyObservers();
         return match;
     }
-
 
     private static void pickRandomTeams(Set<Player> noTeamPlayers, int teamSize, Match match, Team team) {
         List<Player> teamList = pickRandomPlayers(noTeamPlayers, teamSize);
@@ -94,7 +90,6 @@ public abstract class Controller {
         }
         return noTeamPlayers;
     }
-
 
     public static void addPlayers(String[] bnets) {
         storage.addPlayers(bnets);
